@@ -1,0 +1,1 @@
+- [Vercel runtime verification](vercel-runtime.md) — invoke the actual built function with plain Node; a READY build does not prove API runtime compatibility.

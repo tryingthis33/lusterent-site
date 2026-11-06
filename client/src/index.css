@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Luxury Dark Mode Palette */
+  
+  /* Background: Deep, rich black */
+  --background: 0 0% 0%;
+  --foreground: 45 60% 52%; /* Gold: #D4AF37 */
+
+  /* Card backgrounds: Slightly lighter, distinct */
+  --card: 0 0% 5%;
+  --card-foreground: 45 60% 52%;
+  --card-border: 45 60% 52% / 0.3;
+ 
+  /* Popovers */
+  --popover: 0 0% 5%;
+  --popover-foreground: 45 60% 52%;
+  --popover-border: 45 60% 52% / 0.3;
+
+  /* Primary Accent: Metallic Gold */
+  --primary: 45 60% 52%;
+  --primary-foreground: 0 0% 0%;
+
+  /* Secondary: Subtle gray for less important actions */
+  --secondary: 0 0% 8%;
+  --secondary-foreground: 45 60% 52%;
+
+  /* Muted text and backgrounds */
+  --muted: 0 0% 12%;
+  --muted-foreground: 45 60% 45%;
+
+  /* Borders: Subtle separation with gold tint */
+  --accent: 45 60% 52% / 0.15;
+  --accent-foreground: 45 60% 52%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 45 60% 52% / 0.25;
+  --input: 45 60% 52% / 0.25;
+  --ring: 45 60% 52%; /* Gold focus ring */
+
+  --radius: 0.75rem;
+
+  /* Custom Font Variables */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+}
+
+/* Shiny Gold Gradient */
+.text-gold-shiny {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    to bottom right,
+    #B8860B 0%,
+    #DAA520 22%,
+    #FFD700 45%,
+    #FFFACD 50%,
+    #FFD700 55%,
+    #DAA520 78%,
+    #B8860B 100%
+  );
+  filter: drop-shadow(0 0 2px rgba(212,175,55,0.5));
+}
+
+@keyframes logo-shine {
+  0% { transform: translateX(-150%) skewX(-25deg); }
+  50% { transform: translateX(150%) skewX(-25deg); }
+  100% { transform: translateX(150%) skewX(-25deg); }
+}
+
+.logo-shine-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-shine-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 215, 0, 0.4) 45%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 215, 0, 0.4) 55%,
+    rgba(255, 255, 255, 0) 80%,
+    transparent
+  );
+  animation: logo-shine 4s infinite linear;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* 3D Gold Border */
+.border-gold-3d {
+  position: relative;
+  border: 1px solid transparent;
+  background: linear-gradient(to bottom right, #B8860B, #FFD700, #FFFACD, #FFD700, #B8860B) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.gold-shadow {
+  box-shadow: 0 0 20px rgba(212,175,55,0.2), inset 0 0 10px rgba(212,175,55,0.1);
+}
+
+.gold-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(212,175,55,0.4);
+  border-color: rgba(212,175,55,0.6);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-xl;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: flex;
+  width: max-content;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-secondary/30;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full hover:bg-primary/60 transition-colors;
+}
