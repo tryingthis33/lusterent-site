@@ -275,12 +275,14 @@ async function seedDatabase() {
 }
 
 import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
+import { setupGoogleSignIn } from "./auth/googleAdminSetup";
 import { registerAudioRoutes } from "./replit_integrations/audio";
 import { registerImageRoutes } from "./replit_integrations/image";
 
 export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
   await setupAuth(app);
   registerAuthRoutes(app);
+  setupGoogleSignIn(app); // Continue with Google (ADMIN_EMAILS for the owner)
   registerAudioRoutes(app);
   registerImageRoutes(app);
    // A Vercel preview must not seed or bootstrap roles in the live database.

@@ -52,6 +52,17 @@ function returnTarget(): string {
   return to.startsWith("/") && !to.startsWith("//") ? to : "/";
 }
 
+function GoogleButton() {
+  const [on, setOn] = useState(false);
+  useEffect(() => { fetch("/api/auth/google/enabled").then((r) => (r.ok ? r.json() : { google: false })).then((d) => setOn(!!d.google)).catch(() => {}); }, []);
+  if (!on) return null;
+  return (
+    <a href="/api/auth/google" className="mb-4 block w-full rounded-md border bg-white px-4 py-2 text-center text-sm font-medium text-black hover:bg-gray-100" data-testid="google-sign-in">
+      Continue with Google
+    </a>
+  );
+}
+
 export function LoginPage() {
   const [, navigate] = useLocation();
   const queryClient = useQueryClient();
@@ -86,6 +97,7 @@ export function LoginPage() {
       title={mode === "login" ? "Sign in" : "Create your account"}
       description={mode === "login" ? "Access your Luster Entertainment portal." : "We'll email you a link to verify your address."}
     >
+      <GoogleButton />
       <form onSubmit={submit} className="space-y-4" data-testid="auth-form">
         {mode === "register" && (
           <div className="grid grid-cols-2 gap-3">
